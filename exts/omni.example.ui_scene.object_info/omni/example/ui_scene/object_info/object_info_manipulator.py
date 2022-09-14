@@ -32,7 +32,20 @@ class ObjectInfoManipulator(sc.Manipulator):
 
         # If we don't have a selection then just return
         if self.model.get_item("name") == "":
+            self._window = None
             return
+        elif "WindowTrigger" in self.model.get_item("name"):
+            print("selected!")
+            self._window = ui.Window("Control Panel", width=300, height=200, flags=ui.WINDOW_FLAGS_NO_TITLE_BAR)
+            self._window.frame.set_style({
+                "Window":{
+                    "background_color": 0xB7000000,
+                }
+            })
+            return
+        else:
+            self._window = None
+
 
         position = self.model.get_as_floats(self.model.get_item("position"))
 
